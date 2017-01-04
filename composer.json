@@ -34,6 +34,7 @@
         "nelmio/cors-bundle": "^1.4",
         "phpdocumentor/reflection-docblock": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.0",
+        "m1/twig-asset-rev-extension": "dev-filename-construct",
         "jsor/doctrine-postgis": "^1.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "league/geotools": "@stable",
@@ -88,5 +89,11 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:alexsegura/TwigAssetRevExtension.git"
+        }
+    ]
 }

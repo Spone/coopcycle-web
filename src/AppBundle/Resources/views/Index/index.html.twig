@@ -51,7 +51,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/js/homepage.js"></script>
+<script src="{{ asset('js/homepage.js'|asset_rev) }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAqNf8X0elLLXv5yeh0btsYpq47eCzIAw&signed_in=true&libraries=places&callback=initMap"
   async defer></script>
 {% endblock %}

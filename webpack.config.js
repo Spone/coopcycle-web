@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   entry: {
@@ -11,7 +12,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/web/js',
-    filename: "[name].js",
+    filename: "[name].[hash].js",
   },
   module: {
     loaders: [
@@ -40,5 +41,8 @@ module.exports = {
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
       new ExtractTextPlugin("[name].css"),
+      new ManifestPlugin({
+        basePath: 'js/'
+      })
   ]
 };

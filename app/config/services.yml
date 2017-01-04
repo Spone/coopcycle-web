@@ -60,3 +60,9 @@ services:
     class: Twig_Extensions_Extension_Text
     tags:
       - { name: twig.extension }
+
+  twig.extension.asset_rev:
+    class: M1\TwigAssetRevExtension\TwigAssetRevExtension
+    arguments: [ "%kernel.root_dir%/../web/js/manifest.json", false ]
+    tags:
+      - { name: twig.extension }

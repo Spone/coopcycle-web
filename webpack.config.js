@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   entry: {
@@ -14,20 +15,20 @@ module.exports = {
   output: {
     publicPath: "/js",
     path: __dirname + '/web/js',
-    filename: "[name].js",
+    filename: "[name].[hash].js",
   },
   module: {
     loaders: [
       // Extract css files
       {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' })
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
       },
       // Optionally extract less files
       // or any other compile-to-css language
       {
           test: /\.less$/,
-          loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader!less-loader' })
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!less-loader' })
       },
       {
         test: /\.json$/,
@@ -42,7 +43,8 @@ module.exports = {
   },
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name].css")
+      new ExtractTextPlugin("[name].[hash].css"),
+      new ManifestPlugin()
   ],
   devServer: {
       contentBase: __dirname + '/web',

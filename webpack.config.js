@@ -44,7 +44,7 @@ module.exports = {
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
       new ExtractTextPlugin("[name].[hash].css"),
-      new ManifestPlugin()
+      new ManifestPlugin({ basePath: 'js/' })
   ],
   devServer: {
       contentBase: __dirname + '/web',

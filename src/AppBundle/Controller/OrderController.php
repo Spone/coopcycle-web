@@ -143,12 +143,25 @@ class OrderController extends Controller
             $token = $request->request->get('stripeToken');
 
             try {
+
                 $charge = Stripe\Charge::create(array(
                     "amount" => $order->getTotal() * 100, // Amount in cents
                     "currency" => "eur",
                     "source" => $token,
-                    "description" => "Order #".$order->getId()
+                    "description" => "Order #".$order->getId(),
+                    "transfer_group" => "Order#".$order->getId(),
                 ));
+
+                // Create a Transfer to a connected account (later):
+                $owner = $order->getRestaurant()->getOwner();
+
+                $transfer = \Stripe\Transfer::create(array(
+                  "amount" => (($order->getTotal() * 100) * 0.75),
+                  "currency" => "eur",
+                  "destination" => $owner->getStripeParams()->getUserId(),
+                  "transfer_group" => "Order#".$order->getId(),
+                ));
+
             } catch (Stripe\Error\Card $e) {
                 return $this->redirectToRoute('order_error', array('id' => $order->getId()));
             }

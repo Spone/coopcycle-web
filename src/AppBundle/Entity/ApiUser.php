@@ -31,10 +31,12 @@ class ApiUser extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Restaurant", cascade={"all"})
-     * @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn()})
+     * @ORM\OneToMany(targetEntity="Restaurant", mappedBy="owner", cascade={"all"})
+     *
      */
     private $restaurants;
+
+    // @ORM\JoinTable(inverseJoinColumns={@ORM\JoinColumn(unique=true)})
 
     /**
      * @ORM\OneToMany(targetEntity="DeliveryAddress", mappedBy="customer", cascade={"all"})
@@ -46,10 +48,17 @@ class ApiUser extends BaseUser
      */
     private $addresses;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="StripeParams", cascade={"all"})
+     * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(unique=true)})
+     */
+    private $stripeParams;
+
     public function __construct()
     {
         $this->deliveryAddresses = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
+        $this->stripeParams = new ArrayCollection();
 
         parent::__construct();
     }
@@ -114,5 +123,17 @@ class ApiUser extends BaseUser
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    public function getStripeParams()
+    {
+        return count($this->stripeParams) === 0 ? null : $this->stripeParams[0];
+    }
+
+    public function setStripeParams(StripeParams $stripeParams)
+    {
+        $this->stripeParams[0] = $stripeParams;
+
+        return $this;
     }
 }

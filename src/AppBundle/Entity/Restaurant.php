@@ -72,6 +72,11 @@ class Restaurant extends FoodEstablishment
      */
     private $website;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="ApiUser", inversedBy="restaurants")
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -191,5 +196,17 @@ class Restaurant extends FoodEstablishment
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(ApiUser $owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
     }
 }

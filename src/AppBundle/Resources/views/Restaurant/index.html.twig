@@ -2,9 +2,28 @@
 
 {% block body %}
 <div class="container">
+
   <div class="page-header">
     <h1>{{ restaurant.name }}</h1>
   </div>
+
+  <nav class="navbar">
+      {% for timeRange in restaurant.openingHours %}
+      <p class="navbar-text">{{ timeRange }}</p>
+      {% endfor %}
+      <p class="navbar-text">
+        {% if restaurant.isOpen %}
+        <span class="label label-success">{% trans %}Open{% endtrans %}</span>
+        {% else %}
+        <span class="label label-warning">{% trans %}Closed{% endtrans %}</span>
+        {% endif %}
+      </p>
+
+      <p class="navbar-text">
+        {{ restaurant.nextOpeningDate|date('d/m H:i') }}
+      </p>
+  </nav>
+
   <div class="row">
 
     <div class="col-xs-12 col-sm-8">

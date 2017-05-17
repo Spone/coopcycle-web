@@ -27,3 +27,7 @@
 /.vagrant/
 /node_modules/
 .DS_Store
+
+// Sublime Text
+*.sublime-workspace
+*.sublime-project

@@ -52,8 +52,10 @@ module.exports = {
       new ExtractTextPlugin({filename: "css/styles.css", allChunks: true})
   ],
   devServer: {
+      headers: { "Access-Control-Allow-Origin": "http://192.168.99.100" },
       contentBase: __dirname + '/web',
       stats: 'minimal',
-      compress: true
+      compress: true,
+      public: '192.168.99.100:8080'
   }
 };

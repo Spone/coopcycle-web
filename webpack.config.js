@@ -11,11 +11,19 @@ module.exports = {
     'profile-deliveries': './js/app/profile/deliveries.js',
     'restaurant-form': './js/app/restaurant/form.jsx',
     'delivery-form': './js/app/delivery/form.jsx',
+
+    'styles': [
+      './assets/css/antd.min.css',
+      './assets/css/circle.css',
+      './assets/css/font-awesome.min.css',
+      './assets/css/leaflet-beautify-marker.css',
+      './assets/css/styles.css',
+    ]
   },
   output: {
-    publicPath: "/js",
-    path: __dirname + '/web/js',
-    filename: "[name].js",
+    publicPath: "/",
+    path: __dirname + '/web',
+    filename: "js/[name].js",
   },
   module: {
     loaders: [
@@ -24,15 +32,13 @@ module.exports = {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
       },
-      // Optionally extract less files
-      // or any other compile-to-css language
       {
-          test: /\.less$/,
-          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!less-loader' })
+          test: /\.(eot|ttf|woff|woff2)$/,
+          loader: 'file-loader?name=web/fonts/[name].[ext]'
       },
       {
-        test: /\.json$/,
-        loader: "json-loader"
+          test: /\.(svg)$/,
+          loader: 'file-loader?name=web/[name].[ext]'
       },
       {
         test: /\.jsx?/,
@@ -43,7 +49,7 @@ module.exports = {
   },
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name].css")
+      new ExtractTextPlugin({filename: "css/styles.css", allChunks: true})
   ],
   devServer: {
       contentBase: __dirname + '/web',

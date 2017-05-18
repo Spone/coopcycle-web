@@ -12,13 +12,7 @@ module.exports = {
     'restaurant-form': './js/app/restaurant/form.jsx',
     'delivery-form': './js/app/delivery/form.jsx',
 
-    'styles': [
-      './assets/css/antd.min.css',
-      './assets/css/circle.css',
-      './assets/css/font-awesome.min.css',
-      './assets/css/leaflet-beautify-marker.css',
-      './assets/css/styles.css',
-    ]
+    'styles': './assets/css/main.scss'
   },
   output: {
     publicPath: "/",
@@ -27,7 +21,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      // Extract css files
+      {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' })
+      },
       {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
@@ -49,7 +46,7 @@ module.exports = {
   },
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin({filename: "css/styles.css", allChunks: true})
+      new ExtractTextPlugin({filename: "css/[name].css", allChunks: true})
   ],
   devServer: {
       headers: { "Access-Control-Allow-Origin": "http://192.168.99.100" },

@@ -13,6 +13,7 @@ module.exports = {
     'delivery-form': './js/app/delivery/form.jsx',
 
     'styles': './assets/css/main.scss'
+    'tracking': './assets/css/tracking.scss'
   },
   output: {
     publicPath: "/",

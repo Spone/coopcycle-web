@@ -3,6 +3,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
+    'bootstrap': 'bootstrap',
     'cart': './js/app/cart/index.jsx',
     'homepage': './js/app/homepage/index.js',
     'order-payment': './js/app/order/payment.js',
@@ -17,6 +18,11 @@ module.exports = {
     publicPath: "/",
     path: __dirname + '/web',
     filename: "js/[name].js",
+  },
+  resolve: {
+    alias: {
+      jquery: "jquery/src/jquery"
+    }
   },
   module: {
     loaders: [
@@ -45,7 +51,11 @@ module.exports = {
   },
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin({filename: "css/[name].css", allChunks: true})
+      new ExtractTextPlugin({filename: "css/[name].css", allChunks: true}),
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+      })
   ],
   devServer: {
       headers: { "Access-Control-Allow-Origin": "*" },

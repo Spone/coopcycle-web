@@ -77,16 +77,20 @@ class TimeRange
             $closeDate = clone $date;
             $closeDate->setTime($endHour, $endMinute);
 
-            if ($date < $openDate) {
-                return false;
+            if ($closeDate <= $openDate && $date >= $openDate) {
+                $closeDate->modify('+1 day');
             }
 
-            if ($date > $closeDate) {
-                return false;
+            if ($closeDate <= $openDate && $date <= $closeDate) {
+                $openDate->modify('-1 day');
+            }
+
+            if ($date >= $openDate && $date <= $closeDate) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public function isOpen(\DateTime $date = null)
@@ -96,12 +100,10 @@ class TimeRange
         }
 
         if (!$this->checkWeekday($date)) {
-
             return false;
         }
 
         if (!$this->checkTime($date)) {
-
             return false;
         }
 

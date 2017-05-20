@@ -197,16 +197,20 @@ class Restaurant extends FoodEstablishment
     /**
      * @return boolean
      */
-    public function isOpen()
+    public function isOpen(\DateTime $now = null)
     {
+        if (!$now) {
+            $now = new \DateTime();
+        }
+
         foreach ($this->openingHours as $openingHour) {
             $timeRange = new TimeRange($openingHour);
-            if (!$timeRange->isOpen()) {
-                return false;
+            if ($timeRange->isOpen($now)) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public function getNextOpeningDate(\DateTime $now = null)

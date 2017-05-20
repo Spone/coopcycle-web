@@ -3,17 +3,15 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
-    cart: './js/app/cart/index.jsx',
-    tracking: './js/app/tracking/index.jsx',
-    homepage: './js/app/homepage/index.js',
+    'cart': './js/app/cart/index.jsx',
+    'homepage': './js/app/homepage/index.js',
     'order-payment': './js/app/order/payment.js',
-    'order-tracking': ['whatwg-fetch', './js/app/order/tracking.jsx'],
+    'order-tracking': [ 'whatwg-fetch', './js/app/order/tracking.jsx' ],
     'profile-deliveries': './js/app/profile/deliveries.js',
     'restaurant-form': './js/app/restaurant/form.jsx',
     'delivery-form': './js/app/delivery/form.jsx',
-
     'styles': './assets/css/main.scss',
-    'tracking': './assets/css/tracking.scss'
+    'tracking': [ './assets/css/tracking.scss', './js/app/tracking/index.jsx' ]
   },
   output: {
     publicPath: "/",

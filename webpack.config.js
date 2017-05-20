@@ -36,7 +36,7 @@ module.exports = {
       },
       {
           test: /\.(svg|png)$/,
-          loader: 'file-loader?name=css/images[name].[ext]'
+          loader: 'file-loader?name=css/images/[name].[ext]'
       },
       {
         test: /\.jsx?/,

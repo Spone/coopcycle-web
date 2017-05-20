@@ -12,7 +12,7 @@ module.exports = {
     'restaurant-form': './js/app/restaurant/form.jsx',
     'delivery-form': './js/app/delivery/form.jsx',
 
-    'styles': './assets/css/main.scss'
+    'styles': './assets/css/main.scss',
     'tracking': './assets/css/tracking.scss'
   },
   output: {
@@ -32,11 +32,11 @@ module.exports = {
       },
       {
           test: /\.(eot|ttf|woff|woff2)$/,
-          loader: 'file-loader?name=web/fonts/[name].[ext]'
+          loader: 'file-loader?name=fonts/[name].[ext]'
       },
       {
-          test: /\.(svg)$/,
-          loader: 'file-loader?name=web/[name].[ext]'
+          test: /\.(svg|png)$/,
+          loader: 'file-loader?name=css/images[name].[ext]'
       },
       {
         test: /\.jsx?/,

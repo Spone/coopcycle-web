@@ -22,6 +22,10 @@
 /web/bundles/
 /web/images/*
 !web/images/.gitkeep
+/web/css/*
+!web/css/.gitkeep
+/web/fonts/*
+!web/fonts/.gitkeep
 /web/js/*
 !web/js/.gitkeep
 /.vagrant/
